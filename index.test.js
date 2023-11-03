@@ -494,6 +494,14 @@ describe("POST /s2/exercice3", () => {
         expect(res.body).toEqual([{ reponse: "Veuillez entrer une date valide." }]);
     });
 
+    test("Renvoie une erreur si n1 et n2 sont null", async () => {
+      const res = await request(app)
+        .post("/s2/exercice3")
+        .send({ n1: null, n2: null});
+      expect(res.statusCode).toBe(200);
+      expect(res.body).toEqual([{ reponse: "Veuillez entrer une date." }]);
+    });
+
     test("Renvoie une erreur si la date n1 est n'est pas inférieure à la date n2", async () => {
         const res = await request(app).post("/s2/exercice3")
         .send({ n1: "2023-12-31", n2: "2023-12-21"});
@@ -541,6 +549,14 @@ describe("POST /s2/exercice4", () => {
           .send({ n1 : "2023-12-11" });
         expect(res.statusCode).toBe(200);
         expect(res.body).toEqual([{ reponse: "Veuillez entrer un nombre." }]);
+    });
+
+    test("Renvoie une erreur si n1 et n2 sont null", async () => {
+      const res = await request(app)
+        .post("/s2/exercice4")
+        .send({ n1: null, n2: null});
+        expect(res.statusCode).toBe(200);
+        expect(res.body).toEqual([{ reponse: "Veuillez entrer une date." }]);
     });
 
     test("Renvoie une erreur si n1 n'est pas valide", async () => {
@@ -767,7 +783,7 @@ describe("POST /s2/exercice9", () => {
           n2 : "2023-13-10",
           n3 : "2023-02-11", 
           n4 : "2023-02-10"
-      });
+        });
         expect(res.statusCode).toBe(200);
         expect(res.body).toEqual([{ reponse: "Veuillez entrer une date de fin valide pour la plage 1." }]);
     });
